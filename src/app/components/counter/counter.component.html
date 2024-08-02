@@ -1,0 +1,11 @@
+<div class="container mt-5">
+    <h1 class="text-center">Counter</h1>
+    <div class="row justify-content-center">
+      <div class="col-6 text-center">
+        <h2 id="counter">{{count$ | async}}</h2>
+        <button id="incrementBtn" (click)="increment()" class="btn btn-success m-2">Increment</button>
+        <button id="decrementBtn" (click)="decrement()" class="btn btn-danger m-2">Decrement</button>
+        <button id="resetBtn" (click)="reset()" class="btn btn-secondary m-2">Reset</button>
+      </div>
+    </div>
+  </div>

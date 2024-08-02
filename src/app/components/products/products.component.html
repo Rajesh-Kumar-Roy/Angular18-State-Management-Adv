@@ -1,0 +1,15 @@
+<div class="m-3"> 
+    <div class="row g-2">  
+        @for (item of product$ | async; track $index) {
+         
+        <div class="col">
+           
+                <app-product-card [products]="item"></app-product-card>
+            
+        </div>
+    }
+     </div>
+   
+
+</div>
+
