@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IProduct } from '../../models/product.interface';
 import { CurrencyPipe } from '@angular/common';
 
@@ -11,9 +11,14 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class ProductCardComponent {
 
-  @Input() products?: IProduct;
-
+  @Input()
+  products!: IProduct;
+  @Output() handleAdd= new EventEmitter();
   constructor(){
 
+  }
+
+  addToCart(product: IProduct){
+      this.handleAdd.emit(product);
   }
 }

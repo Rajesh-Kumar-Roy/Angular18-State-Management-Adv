@@ -1,9 +1,12 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
 import { IProduct } from '../../shared/models/product.interface';
+import { ProductApiService } from '../../shared/services/product-api.service';
+import { Store } from '@ngrx/store';
+import { addToCart } from '../../states/cart/cart.action';
 
 @Component({
   selector: 'app-products',
@@ -12,7 +15,19 @@ import { IProduct } from '../../shared/models/product.interface';
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
+ 
   http = inject(HttpClient);
-  product$ = this.http.get('https://fakestoreapi.com/products') as Observable<IProduct[]>;
+  productApi= inject(ProductApiService);
+  product$ = this.productApi.getProducts() as Observable<IProduct[]>;
+
+  constructor(private store: Store<{cart: {products: IProduct[]}}>){
+    
+  }
+  ngOnInit(): void {
+  }
+
+  addItemToCart(product: IProduct){
+    this.store.dispatch(addToCart({product}));
+  }
 }

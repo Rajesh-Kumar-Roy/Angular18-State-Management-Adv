@@ -32,7 +32,12 @@
         <ul class="navbar-nav me-auto my-3 mr-3 my-lg-0 navbar-nav-scroll">
             <li class="nav-item">
                 <!-- <a class="nav-link " width="16" height="16"><i class="bi bi-cart-dash-fill"></i></a> -->
-                <button class="btn btn-outline-secondary  me-2" routerLink="/cart"><i class="bi bi-cart-dash-fill" width="16" height="16"></i></button>
+                <button class="btn btn-outline-secondary position-relative  me-2" routerLink="/cart"><i class="bi bi-cart-dash-fill" width="16" height="16"></i>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+                    {{(products$ | async)?.length}}
+                    <span class="visually-hidden">unread messages</span>
+                  </span>
+                </button>
             </li>
         </ul>
        </div>

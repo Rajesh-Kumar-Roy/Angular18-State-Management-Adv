@@ -1,1 +1,101 @@
-<p>cart works!</p>
+<span class="text-dark">
+    {{cartItem$ | async | json}}
+</span>
+
+
+<!-- <div class="container mt-5">
+    <h1 class="text-right">Your Cart</h1>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-header">
+            <h4>Cart Items</h4>
+          </div>
+          <div class="card-body">
+            <ul class="list-group mb-3" *ngIf="(cartItem$ | async)?.length; else emptyCart">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <h5>sdvsz</h5>
+                  <p>Price: ${{ 555}} | Quantity: {{ 100}}</p>
+                </div>
+                <div>
+                  <button class="btn btn-sm btn-danger m-1" >+</button>
+                  <button class="btn btn-sm btn-danger m-1" >-</button>
+                  <button class="btn btn-sm btn-danger" >Remove</button>
+                </div>
+              </li>
+            </ul>
+            <ng-template #emptyCart>
+              <p class="text-center">Your cart is empty.</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-4"  *ngIf="(cartItem$ | async)?.length;">
+        <div class="card mb-4">
+          <div class="card-header">
+            <h4>Order Summary</h4>
+          </div>
+          <div class="card-body">
+            <ul class="list-group mb-3">
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Total (USD)</span>
+                <strong>${{ 34 }}</strong>
+              </li>
+            </ul>
+            <button class="btn btn-primary btn-lg btn-block" routerLink="/checkout">Proceed to Checkout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
+  
+
+  <div class="container mt-5">
+    <h1 class="text-right">Your Cart</h1>
+    <div *ngIf="(cartItem$ | async)?.length === 0" class="text-center">
+      <p>Your cart is empty.</p>
+    </div>
+    <div class="row" *ngIf="(cartItem$|async)?.length">
+      <div class="col-md-8">
+        <div *ngFor="let item of (cartItem$ | async)" class="card mb-3">
+          <div class="row no-gutters">
+            <div class="col-md-2">
+              <img [src]="item.image" class="card-img" alt="{{item.title}}">
+            </div>
+            <div class="col-md-10">
+              <div class="card-body">
+                <h5 class="card-title">{{item.title}}</h5>
+               
+                <p class="card-text"><small class="text-muted">Price: ${{item.price}}</small></p>
+                <button class="btn btn-danger" >Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <h4>Order Summary</h4>
+          </div>
+          <div class="card-body">
+            <ul class="list-group mb-3">
+              <li class="list-group-item d-flex justify-content-between" *ngFor="let item of (cartItem$ | async)">
+                <div>{{item.title}}</div>
+                <span>${{item.price}}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Total (USD)</span>
+                <strong>${{ 4444 }}</strong>
+              </li>
+            </ul>
+            <button class="btn btn-primary btn-lg btn-block" >Proceed to Checkout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideState, provideStore } from '@ngrx/store';
 import { counterReducer } from './states/counter/counter.reducer';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { cartReducer } from './states/cart/cart.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
@@ -12,6 +13,7 @@ export const appConfig: ApplicationConfig = {
      //provideHttpClient(withFetch()), /// withFetch() using only server side angular application
      provideHttpClient(),
      provideStore(),
-     provideState({name:'counter', reducer: counterReducer})
+     provideState({name:'counter', reducer: counterReducer}),
+     provideState({name:'cart', reducer: cartReducer}),
   ]
 };

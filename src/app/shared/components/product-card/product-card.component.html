@@ -1,14 +1,14 @@
-<div class="card h-80" style="width: 18rem;">
-    <img src="{{products?.image}}" class="card-img-top" alt="..." >
+<div class="card h-90" style="width: 18rem;">
+    <img src="{{products.image}}" class="card-img-top" alt="..." >
     <div class="card-body mb-0">
-      <h5 class="card-title">{{products?.title?.substring(0,50)}}</h5>
-      <p class="card-text ">{{products?.description?.substring(0,70)}}...</p>
-      <p class="badge text-bg-dark">{{products?.price | currency}}</p>
+      <h5 class="card-title">{{products.title.substring(0,50)}}</h5>
+      <p class="card-text ">{{products.description.substring(0,70)}}...</p>
+      <p class="badge text-bg-dark">{{products.price ? (products.price  | currency) : 0}}</p>
     </div>
     <div class="card-body mt-0">
         <div class="row">
-            <a href="#" class="btn btn-success col-12 mb-1">Add To Cart</a>
-            <a href="#" class="btn btn-warning col-12">View Product</a>
+            <button (click)="addToCart(products)" class="btn btn-success col-12 mb-1">Add To Cart</button>
+            <button class="btn btn-warning col-12">View Product</button>
         </div>
        
     </div>
