@@ -4,13 +4,17 @@ import { IProduct } from "../../shared/models/product.interface";
 import * as CartAction from './cart.action';
 export interface CartState{
     proudcts: IProduct[];
-    totalPrice?: number;
+    totalPrice: number;
 }
 
 export const initialCartState: CartState ={
-    proudcts: []
+    proudcts: [],
+    totalPrice: 0
 }
 
+export function calculateTotalPrice(products: IProduct[]){
+    return products.reduce((total, product)=> total + (product.price * product.quantity),0);
+}
 
 export const cartReducer = createReducer(
     initialCartState,
@@ -18,7 +22,8 @@ export const cartReducer = createReducer(
         const updatedProducts = [...state.proudcts, product]
         return{
             ...state,
-            proudcts: updatedProducts
+            proudcts: updatedProducts,
+            totalPrice: calculateTotalPrice(updatedProducts)
         }
     }),
 
@@ -26,7 +31,8 @@ export const cartReducer = createReducer(
         const updatedProducts = state.proudcts.map((product)=> product.id === productId ? {...product, quantity: product.quantity + 1} : product);
         return {
             ...state,
-            proudcts: updatedProducts
+            proudcts: updatedProducts,
+            totalPrice: calculateTotalPrice(updatedProducts)
         }
     }),
 
@@ -34,7 +40,8 @@ export const cartReducer = createReducer(
         const updatedProducts = state.proudcts.map((product) => product.id === productId ? { ...product, quantity: product.quantity - 1 } : product);
         return {
             ...state,
-            proudcts: updatedProducts
+            proudcts: updatedProducts,
+            totalPrice: calculateTotalPrice(updatedProducts)
         }
     }),
 
@@ -42,7 +49,8 @@ export const cartReducer = createReducer(
         const updatedProducts = state.proudcts.filter((product)=> product.id !== productId);
         return {
             ...state,
-            proudcts: updatedProducts
+            proudcts: updatedProducts,
+            totalPrice: calculateTotalPrice(updatedProducts)
         }
     }),
 )
