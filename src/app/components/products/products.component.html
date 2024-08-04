@@ -1,15 +1,19 @@
-<div class="m-3"> 
-    <div class="row g-2">  
-        @for (item of product$ | async; track $index) {
-         
-        <div class="col">
-           
-                <app-product-card [products]="item" (handleAdd)="addItemToCart($event)"></app-product-card>
-            
-        </div>
-    }
-     </div>
-   
-
+@if(error$ | async){
+<div class="m-4">
+    <h1 class="text-center text-danger">Something went worng while loading products.</h1>
 </div>
+}@else {
+    <div class="m-3"> 
+        <div class="row g-2">  
+            @for (item of product$ | async; track $index) {
+             
+            <div class="col">
+               
+                    <app-product-card [products]="item" (handleAdd)="addItemToCart($event)"></app-product-card>
+                
+            </div>
+        }
+         </div>
+    </div>
+}
 
